@@ -9,9 +9,15 @@ html {
 /* background */
 
 @keyframes GradientBG {
-  0%{background-position: 0% 50%}
-  50%{background-position: 100% 50%}
-  100%{background-position: 0% 50%}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 * {
@@ -76,7 +82,7 @@ body {
   cursor: pointer;
 }
 
-.dog:hover{
+.dog:hover {
   background: #c5dbb0;
   margin: 5px;
   padding: 10px 20px;
@@ -95,6 +101,47 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.dog > h3 > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dog > h3 > div > .edit-form {
+  margin-bottom: 10px;
+}
+
+.dog > h3 > div > .form-control {
+  margin: 10px 0;
+}
+
+.dog > h3 > div > .form-control label {
+  display: block;
+}
+
+.dog > h3 > div > .form-control input {
+  width: 50%;
+  height: 20px;
+  margin: 5px;
+  padding: 3px 7px;
+  font-size: 8px;
+}
+
+.dog > h3 > div > .form-control-check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dog > h3 > div > .form-control-check label {
+  flex: 1;
+}
+
+.dog > h3 > div > .form-control-check input {
+  flex: 2;
+  height: 20px;
 }
 
 .add-form {

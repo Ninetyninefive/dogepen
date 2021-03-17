@@ -1,6 +1,6 @@
 import Dog from './Dog'
 
-const Dogs = ({ dogs, onDelete, onToggle }) => {
+const Dogs = ({ dogs, onDelete, onEdit, onToggle }) => {
     
     return (
         <>
@@ -9,6 +9,7 @@ const Dogs = ({ dogs, onDelete, onToggle }) => {
             dog={dog}
             onDelete={onDelete}
             onToggle={onToggle}
+            onEdit={onEdit}
 
             />
             ))}

@@ -6,38 +6,14 @@ import About from './components/About'
 import Footer from './components/Footer'
 import Dogs from './components/Dogs'
 import AddDog from './components/AddDog'
+import EditDog from './components/EditDog'
+import Profile from './components/Profile'
 
 function App() {
   const [showAddDog, setShowAddDog] = useState(false)
+  const [showEditDog, setShowEditDog] = useState(false)
   const [dogs, setDogs] = useState([
 
-    {
-        id: 1,
-        name: 'Britta',
-        nickname: 'Gråskägg',
-        age: 0, 
-        bio: 'Jassåmensan',
-        present: true,
-
-    },
-    {
-        id: 2,
-        name: 'Adolf',
-        nickname: 'Blåfot',
-        age: 0, 
-        bio: 'Jassåmensan',
-        present: true,
-
-    },
-    {
-        id: 3,
-        name: 'Kurt',
-        nickname: 'Plattben',
-        age: 0, 
-        bio: 'Jassåmensan',
-        present: true,
-
-    }
   ])
 
   useEffect(()=> {
@@ -92,6 +68,42 @@ function App() {
     setDogs(dogs.filter((dog) => dog.id !== id))
   }
 
+  const editDog = async (id) => {
+
+    console.log('click', id)
+    const dogToEdit = await fetchDog(id)
+    const updDog = {...dogToEdit, 
+      present: dogToEdit.present, 
+      name: dogToEdit.name, 
+      nickname: dogToEdit.nickname,
+      age: dogToEdit.age,
+      bio: dogToEdit.bio,
+
+    }
+
+    const res = await fetch(`http://localhost:5000/dogs/${id}`, {
+      method:'PUT',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(updDog)
+    })
+
+    const data = await res.json()
+
+    setDogs(
+      dogs.map((dog) => 
+        dog.id === id ? {...dog, 
+          present: data.present,
+          name: data.name, 
+          nickname: data.nickname,
+          age: data.age,
+          bio: data.bio,
+        } : dog
+    )
+  )
+  }
+
   // Toggle Presence
   const togglePresence = async (id) => {
     const dogToToggle = await fetchDog(id)
@@ -117,7 +129,12 @@ function App() {
   return (
     <Router>
     <div className="container">
-      <Header onAdd={()=> setShowAddDog(!showAddDog)} showAdd={showAddDog}/>
+      <Header 
+        onAdd={()=> setShowAddDog(!showAddDog)} 
+        showAdd={showAddDog}
+        
+
+        />
       
         <Route path='/' exact render={(prop) =>(
           <>
@@ -127,6 +144,7 @@ function App() {
             dogs={dogs} 
             onDelete={deleteDog}
             onToggle={togglePresence}
+            onEdit={editDog}
 
       />) : (
         'No doges! Add more doges!'
