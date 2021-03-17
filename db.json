@@ -1,0 +1,36 @@
+{
+  "dogs": [
+    {
+      "name": "Herkules",
+      "nickname": "Boris",
+      "age": "14",
+      "bio": "Från Nynäshamn!",
+      "present": true,
+      "id": 1
+    },
+    {
+      "name": "Stig-Britt",
+      "nickname": "Herkules",
+      "age": "14",
+      "bio": "Wasd",
+      "present": true,
+      "id": 2
+    },
+    {
+      "name": "wasd",
+      "nickname": "wawd",
+      "age": "wdawd",
+      "bio": "wdawd",
+      "present": true,
+      "id": 3
+    },
+    {
+      "name": "Båstadmannen",
+      "nickname": "Sickan",
+      "age": "14",
+      "bio": "Sjuttyfyrtio!",
+      "present": true,
+      "id": 4
+    }
+  ]
+}
