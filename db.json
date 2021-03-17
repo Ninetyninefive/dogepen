@@ -31,6 +31,14 @@
       "bio": "Sjuttyfyrtio!",
       "present": true,
       "id": 4
+    },
+    {
+      "name": "Such doge",
+      "nickname": "MuchoMacho",
+      "age": "55",
+      "bio": "Älskar nudlar",
+      "present": true,
+      "id": 5
     }
   ]
 }

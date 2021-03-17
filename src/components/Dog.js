@@ -9,7 +9,7 @@ const  Dog = ({ dog, onDelete, onToggle }) => {
             {dog.nickname}
             <FaTimes 
             style={{ 
-                color: 'blue',
+                color: 'red',
                 cursor: 'pointer',
             }} 
             onClick={() => onDelete(dog.id)}

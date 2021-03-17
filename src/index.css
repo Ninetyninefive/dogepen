@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
+html {
+  background: linear-gradient(270deg, #c6fff1, #fcffcf, #ffcaca);
+  background-size: 600% 600%;
+  animation: GradientBG 20s ease infinite;
+}
+
+/* background */
+
+@keyframes GradientBG {
+  0%{background-position: 0% 50%}
+  50%{background-position: 100% 50%}
+  100%{background-position: 0% 50%}
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,6 +25,7 @@ body {
 }
 
 .container {
+  background: #f4f4f4;
   max-width: 500px;
   margin: 30px auto;
   overflow: auto;
@@ -25,13 +40,6 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-}
-
-.mainImage {
-  max-width: 500px;
-  max-height: 100px;
-  overflow-inline: inherit;
-  
 }
 
 .btn {
@@ -62,7 +70,14 @@ body {
 }
 
 .dog {
-  background: #f4f4f4;
+  background: #ebf0e6;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.dog:hover{
+  background: #c5dbb0;
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
@@ -118,6 +133,6 @@ body {
 }
 
 footer {
-  margin-top: 30px;
+  margin-top: 50px;
   text-align: center;
 }
