@@ -1,60 +1,31 @@
 {
   "dogs": [
     {
-      "name": "Herkules",
-      "nickname": "Boris",
+      "name": "Murkel",
+      "nickname": "Jansson",
       "age": "14",
-      "bio": "Från Nynäshamn!",
+      "bio": "Gillar inte katter",
       "present": true,
+      "frinds": [],
       "id": 1
     },
     {
-      "name": "Stig-Britt",
-      "nickname": "Herkules",
-      "age": "14",
-      "bio": "Wasd",
+      "name": "Hakkepellitta",
+      "nickname": "Musmurklarn",
+      "age": "55",
+      "bio": "Tycker inte om tyska apor",
       "present": true,
+      "frinds": [],
       "id": 2
     },
     {
-      "name": "wasd",
-      "nickname": "wawd",
-      "age": "wdawd",
-      "bio": "wdawd",
-      "present": true,
-      "id": 3
-    },
-    {
-      "name": "Båstadmannen",
-      "nickname": "Sickan",
-      "age": "14",
-      "bio": "Sjuttyfyrtio!",
-      "present": true,
-      "id": 4
-    },
-    {
-      "name": "Such doge",
-      "nickname": "MuchoMacho",
+      "name": "Herkelurnarn",
+      "nickname": "Herkules",
       "age": "55",
-      "bio": "Älskar nudlar",
+      "bio": "Vem vet vart ifrån han kommer.... ?",
       "present": true,
-      "id": 5
-    },
-    {
-      "name": "awdawdaw",
-      "nickname": "dawdawdawd",
-      "age": "awdawdawda",
-      "bio": "awdawdaw",
-      "present": true,
-      "id": 6
-    },
-    {
-      "name": "awdawd",
-      "nickname": "awdawd",
-      "age": "awdawd",
-      "bio": "awdawd",
-      "present": true,
-      "id": 7
+      "frinds": [],
+      "id": 3
     }
   ]
 }

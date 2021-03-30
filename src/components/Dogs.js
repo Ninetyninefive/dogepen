@@ -1,20 +1,20 @@
+import React, { useState, useContext } from 'react';
 import Dog from './Dog'
+import { DogContext } from './DogContext';
 
-const Dogs = ({ dogs, onDelete, onEdit, onToggle }) => {
-    
+const Dogs = () => {
+
+    const [dogs, setDogs] = useContext(DogContext)
+
     return (
-        <>
-        {dogs.map((dog) => (
-            <Dog key={dog.id} 
-            dog={dog}
-            onDelete={onDelete}
-            onToggle={onToggle}
-            onEdit={onEdit}
 
-            />
-            ))}
-        </>
-    )
-}
+        <div>
+            {dogs.map(dog =>
+                <Dog key={dog.id} name={dog.name} present={dog.present} />
+            )
+            }
+        </div >
+    );
+};
 
 export default Dogs

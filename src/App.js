@@ -1,25 +1,26 @@
 import { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid';
+import { DogProvider } from './components/DogContext'
+
 
 import Header from './components/Header'
-import About from './components/About'
+import About from './view/About'
 import Footer from './components/Footer'
 import Dogs from './components/Dogs'
 import AddDog from './components/AddDog'
-import EditDog from './components/EditDog'
 import Profile from './components/Profile'
+import EditDog from './components/EditDog';
 
 function App() {
   const [showAddDog, setShowAddDog] = useState(false)
-  const [showEditDog, setShowEditDog] = useState(false)
-  const [dogs, setDogs] = useState([
+  const [dogs, setDogs] = useState([])
 
-  ])
-
-  useEffect(()=> {
+  useEffect(() => {
     const getDogs = async () => {
-      const dogsFromServer = await fetchDogs()
-      setDogs(dogsFromServer)
+      let dogs = localStorage.getItem("dogs");
+      dogs = (dogs) ? JSON.parse(dogs) : [];
+      setDogs(dogs)
     }
 
     getDogs()
@@ -39,42 +40,37 @@ function App() {
   }
 
 
+  localStorage.setItem("dogs", JSON.stringify(dogs));
+
   // Add Dog
   const addDog = async (dog) => {
-    const res = await fetch('http://localhost:5000/dogs', {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify(dog)
-    })
+    dogs.push(dog);
 
-    const data = await res.json()
+    const data = await localStorage.setItem("dogs", JSON.stringify(dogs));
 
     setDogs([...dogs, data])
-
-    //const id = Math.floor(Math.random() * 10000) +1
-
-    //const newDog = { id, ...dog}
-    //setDogs([...dogs, newDog])
   }
 
   // Delete Dog
   const deleteDog = async (id) => {
     await fetch(`http://localhost:5000/dogs/${id}`, {
       method: 'DELETE'
+
     })
 
     setDogs(dogs.filter((dog) => dog.id !== id))
   }
 
+
   const editDog = async (id) => {
 
     console.log('click', id)
+
     const dogToEdit = await fetchDog(id)
-    const updDog = {...dogToEdit, 
-      present: dogToEdit.present, 
-      name: dogToEdit.name, 
+    const updDog = {
+      ...dogToEdit,
+      present: dogToEdit.present,
+      name: dogToEdit.name,
       nickname: dogToEdit.nickname,
       age: dogToEdit.age,
       bio: dogToEdit.bio,
@@ -82,7 +78,7 @@ function App() {
     }
 
     const res = await fetch(`http://localhost:5000/dogs/${id}`, {
-      method:'PUT',
+      method: 'PUT',
       headers: {
         'Content-type': 'application/json'
       },
@@ -92,24 +88,29 @@ function App() {
     const data = await res.json()
 
     setDogs(
-      dogs.map((dog) => 
-        dog.id === id ? {...dog, 
+      dogs.map((dog) =>
+        dog.id === id ? {
+          ...dog,
           present: data.present,
-          name: data.name, 
+          name: data.name,
           nickname: data.nickname,
           age: data.age,
           bio: data.bio,
         } : dog
+      )
     )
-  )
   }
 
+  const viewProfile = async (id) => {
+    const result = fetchDog(id);
+    return result
+  }
   // Toggle Presence
   const togglePresence = async (id) => {
     const dogToToggle = await fetchDog(id)
-    const updDog = {...dogToToggle, present: !dogToToggle.present }
+    const updDog = { ...dogToToggle, present: !dogToToggle.present }
     const res = await fetch(`http://localhost:5000/dogs/${id}`, {
-      method:'PUT',
+      method: 'PUT',
       headers: {
         'Content-type': 'application/json'
       },
@@ -119,42 +120,48 @@ function App() {
     const data = await res.json()
 
     setDogs(
-      dogs.map((dog) => 
-        dog.id === id ? {...dog, present:
-        data.present} : dog
+      dogs.map((dog) =>
+        dog.id === id ? {
+          ...dog, present:
+            data.present
+        } : dog
+      )
     )
-  )
   }
 
   return (
-    <Router>
-    <div className="container">
-      <Header 
-        onAdd={()=> setShowAddDog(!showAddDog)} 
-        showAdd={showAddDog}
-        
+    <DogProvider>
+      <div className="container">
+        <Header />
+
+        <Route path='/' exact render={(prop) => (
+          <Dogs />
+        )} />
+
+
+        <Route
+          path='/about'
+          component={About}
 
         />
-      
-        <Route path='/' exact render={(prop) =>(
-          <>
-          {showAddDog && <AddDog onAdd={addDog}/>}
-          {dogs.length > 0 ? (
-          <Dogs 
-            dogs={dogs} 
-            onDelete={deleteDog}
-            onToggle={togglePresence}
-            onEdit={editDog}
+        <Route
+          path='/profile'
+          component={Profile}
 
-      />) : (
-        'No doges! Add more doges!'
-        )}
-          </>
-        )} />
-        <Route path='/about' component={About} />
+        />
+        <Route
+          path='/AddDog'
+          component={AddDog}
+
+        />
+        <Route
+          path='/edit'
+          component={EditDog}
+
+        />
         <Footer />
-    </div>
-    </Router>
+      </div>
+    </DogProvider>
   );
 }
 

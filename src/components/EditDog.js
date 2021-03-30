@@ -2,6 +2,7 @@ import  {useState } from 'react'
 
 const EditDog = ({ dog, onEdit }) => { 
     
+
     const [name, setName] = useState(dog.name)
     const [nickname, setNickname] = useState(dog.nickname)
     const [age, setAge] = useState(dog.age)
@@ -16,7 +17,7 @@ const EditDog = ({ dog, onEdit }) => {
             return
         }
 
-        onEdit({name, nickname, age, bio, present})
+        onEdit({ name, nickname, age, bio, present})
     }
 
     return (
